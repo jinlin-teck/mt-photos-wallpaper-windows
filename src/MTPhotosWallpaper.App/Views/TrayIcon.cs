@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows;
 using System.Windows.Forms;
 using System.Drawing;
 using MTPhotosWallpaper.Models;
@@ -315,6 +316,9 @@ public class TrayIcon : IDisposable
 
     private void ShowSettings()
     {
+        // 恢复窗口显示状态
+        _mainWindow.ShowInTaskbar = true;
+        _mainWindow.WindowState = WindowState.Normal;
         _mainWindow.Show();
         _mainWindow.Activate();
     }

@@ -34,9 +34,23 @@ public partial class App : Application
         ApiService = new MTPhotosApiService();
         WallpaperService = new WallpaperService();
 
-        // 创建并显示主窗口
+        // 加载设置
+        var settings = SettingsService.LoadSettings();
+
+        // 创建主窗口
         MainWindow = new MainWindow();
-        MainWindow.Show();
+
+        // 如果是开机启动且设置了开机隐藏窗口，则启动时隐藏窗口
+        if (settings.StartOnBoot)
+        {
+            MainWindow.WindowState = WindowState.Minimized;
+            MainWindow.ShowInTaskbar = false;
+            MainWindow.Hide();
+        }
+        else
+        {
+            MainWindow.Show();
+        }
 
         // 创建托盘图标
         TrayIcon = new TrayIcon((MainWindow)MainWindow);
