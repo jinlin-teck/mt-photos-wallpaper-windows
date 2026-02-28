@@ -1,0 +1,123 @@
+<Window x:Class="MTPhotosWallpaper.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MT-Photos Wallpaper"
+        Height="650" Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="Connection Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            
+            <TextBlock Text="Server URL" FontWeight="SemiBold" Margin="0,5,0,3"/>
+            <TextBox x:Name="ServerUrlTextBox" />
+            
+            <TextBlock Text="Username" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <TextBox x:Name="UsernameTextBox" />
+            
+            <TextBlock Text="Password" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <PasswordBox x:Name="PasswordBox" />
+            
+            <Button x:Name="TestConnectionButton"
+                    Content="Test Connection"
+                    Margin="0,10,0,0"
+                    Padding="10,5"/>
+            
+            <TextBlock x:Name="ConnectionStatusTextBlock"
+                       Text="Not tested"
+                       Foreground="Gray"
+                       Margin="0,5,0,0"/>
+
+            <Separator Margin="0,15,0,15"/>
+
+            <TextBlock Text="Wallpaper Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            
+            <TextBlock Text="Change Interval (seconds)" FontWeight="SemiBold" Margin="0,5,0,3"/>
+            <Slider x:Name="IntervalSlider"
+                    Minimum="60" Maximum="86400"
+                    TickFrequency="60" IsSnapToTickEnabled="True"
+                    Value="1800"/>
+            <TextBlock x:Name="IntervalTextBlock" Text="1800 seconds (30 minutes)" Margin="0,3,0,0"/>
+            
+            <TextBlock Text="Picture Options" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <ComboBox x:Name="PictureOptionsComboBox">
+                <ComboBoxItem Content="Zoom" Tag="zoom"/>
+                <ComboBoxItem Content="Centered" Tag="centered"/>
+                <ComboBoxItem Content="Scaled" Tag="scaled"/>
+                <ComboBoxItem Content="Stretched" Tag="stretched"/>
+                <ComboBoxItem Content="Spanned" Tag="spanned"/>
+                <ComboBoxItem Content="Wallpaper" Tag="wallpaper"/>
+            </ComboBox>
+            
+            <TextBlock Text="Background Color" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <TextBox x:Name="BackgroundColorTextBox" Text="#000000"/>
+            
+            <TextBlock Text="Minimum Aspect Ratio" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <Slider x:Name="AspectRatioSlider"
+                    Minimum="0" Maximum="10"
+                    TickFrequency="0.1" IsSnapToTickEnabled="True"
+                    Value="0.0"/>
+            <TextBlock x:Name="AspectRatioTextBlock" Text="0.0" Margin="0,3,0,0"/>
+            
+            <CheckBox x:Name="RandomPlaybackCheckBox"
+                      Content="Random Playback"
+                      IsChecked="True"
+                      Margin="0,10,0,0"/>
+
+            <Separator Margin="0,15,0,15"/>
+
+            <TextBlock Text="Cache Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            
+            <TextBlock Text="Max Cache Files" FontWeight="SemiBold" Margin="0,5,0,3"/>
+            <Slider x:Name="MaxCacheFilesSlider"
+                    Minimum="5" Maximum="500"
+                    TickFrequency="10" IsSnapToTickEnabled="True"
+                    Value="50"/>
+            <TextBlock x:Name="MaxCacheFilesTextBlock" Text="50 files" Margin="0,3,0,0"/>
+            
+            <TextBlock Text="Max Cache Size (MB)" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <Slider x:Name="MaxCacheSizeSlider"
+                    Minimum="50" Maximum="10000"
+                    TickFrequency="50" IsSnapToTickEnabled="True"
+                    Value="500"/>
+            <TextBlock x:Name="MaxCacheSizeTextBlock" Text="500 MB" Margin="0,3,0,0"/>
+
+            <Separator Margin="0,15,0,15"/>
+
+            <TextBlock Text="Album Selection" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            
+            <TextBlock Text="Select Album" FontWeight="SemiBold" Margin="0,5,0,3"/>
+            <ComboBox x:Name="AlbumComboBox">
+                <ComboBoxItem Content="Please select an album"/>
+            </ComboBox>
+            
+            <Button x:Name="RefreshAlbumsButton"
+                    Content="Refresh Albums"
+                    Margin="0,10,0,0"
+                    Padding="10,5"/>
+
+            <Separator Margin="0,15,0,15"/>
+
+            <TextBlock Text="Other Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            
+            <CheckBox x:Name="ShowTrayIconCheckBox"
+                      Content="Show Tray Icon"
+                      IsChecked="True"
+                      Margin="0,5,0,0"/>
+            
+            <CheckBox x:Name="PausedCheckBox"
+                      Content="Pause Rotation"
+                      Margin="0,5,0,0"/>
+            
+            <CheckBox x:Name="StartOnBootCheckBox"
+                      Content="Start on boot"
+                      Margin="0,5,0,0"/>
+
+            <Button x:Name="SaveButton"
+                    Content="Save Settings"
+                    Margin="0,20,0,0"
+                    Padding="20,8"
+                    HorizontalAlignment="Right"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

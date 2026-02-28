@@ -1,0 +1,24 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Windows
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# AI Agent Files
+.sisyphus/
+AGENTS.md
+CLAUDE.md
