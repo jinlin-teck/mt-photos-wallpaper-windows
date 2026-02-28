@@ -3,6 +3,7 @@
 [Rr]elease/
 bin/
 obj/
+publish-*/
 
 # Visual Studio
 .vs/
@@ -20,5 +21,6 @@ logs/
 
 # AI Agent Files
 .sisyphus/
+.claude/
 AGENTS.md
 CLAUDE.md
