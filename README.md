@@ -61,7 +61,7 @@
 下载 `publish-self-contained.zip` 或 `publish-fdd.zip` 后解压：
 
 - **自包含版本** (`publish-self-contained/`)：单文件，156MB，不需要安装 .NET Runtime
-- **框架依赖版本** (`publish-fdd-nonsingle/`)：体积小（约 900KB），但需要先安装 [.NET 8 Runtime](https://dotnet.microsoft.com/download/dotnet/8.0)
+- **框架依赖版本** (`publish-fdd-nonsingle/`)：体积小（约 1.2MB），适合电脑上已安装了 [.NET 8 Runtime](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 解压后直接运行 `MTPhotosWallpaper.exe`。
 

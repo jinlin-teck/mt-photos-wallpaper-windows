@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- 主窗口标题 -->
+  <data name="WindowTitle" xml:space="preserve">
+    <value>MT-Photos Wallpaper</value>
+  </data>
+
+  <!-- 连接设置 -->
+  <data name="ConnectionSettings" xml:space="preserve">
+    <value>Connection Settings</value>
+  </data>
+  <data name="ServerUrl" xml:space="preserve">
+    <value>Server URL</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="TestConnection" xml:space="preserve">
+    <value>Test Connection</value>
+  </data>
+  <data name="NotTested" xml:space="preserve">
+    <value>Not tested</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Testing...</value>
+  </data>
+  <data name="TestingConnection" xml:space="preserve">
+    <value>Testing connection...</value>
+  </data>
+  <data name="ConnectionSuccessful" xml:space="preserve">
+    <value>Connection successful!</value>
+  </data>
+  <data name="ConnectionFailed" xml:space="preserve">
+    <value>Connection failed</value>
+  </data>
+
+  <!-- 壁纸设置 -->
+  <data name="WallpaperSettings" xml:space="preserve">
+    <value>Wallpaper Settings</value>
+  </data>
+  <data name="ChangeIntervalSeconds" xml:space="preserve">
+    <value>Change Interval (seconds)</value>
+  </data>
+  <data name="PictureOptions" xml:space="preserve">
+    <value>Picture Options</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Zoom</value>
+  </data>
+  <data name="Centered" xml:space="preserve">
+    <value>Centered</value>
+  </data>
+  <data name="Scaled" xml:space="preserve">
+    <value>Scaled</value>
+  </data>
+  <data name="Stretched" xml:space="preserve">
+    <value>Stretched</value>
+  </data>
+  <data name="Spanned" xml:space="preserve">
+    <value>Spanned</value>
+  </data>
+  <data name="WallpaperMode" xml:space="preserve">
+    <value>Wallpaper</value>
+  </data>
+  <data name="BackgroundColor" xml:space="preserve">
+    <value>Background Color</value>
+  </data>
+  <data name="MinimumAspectRatio" xml:space="preserve">
+    <value>Minimum Aspect Ratio</value>
+  </data>
+  <data name="RandomPlayback" xml:space="preserve">
+    <value>Random Playback</value>
+  </data>
+
+  <!-- 缓存设置 -->
+  <data name="CacheSettings" xml:space="preserve">
+    <value>Cache Settings</value>
+  </data>
+  <data name="MaxCacheFiles" xml:space="preserve">
+    <value>Max Cache Files</value>
+  </data>
+  <data name="MaxCacheSizeMb" xml:space="preserve">
+    <value>Max Cache Size (MB)</value>
+  </data>
+
+  <!-- 相册选择 -->
+  <data name="AlbumSelection" xml:space="preserve">
+    <value>Album Selection</value>
+  </data>
+  <data name="SelectAlbum" xml:space="preserve">
+    <value>Select Album</value>
+  </data>
+  <data name="PleaseSelectAlbum" xml:space="preserve">
+    <value>Please select an album</value>
+  </data>
+  <data name="RefreshAlbums" xml:space="preserve">
+    <value>Refresh Albums</value>
+  </data>
+  <data name="PhotosLabel" xml:space="preserve">
+    <value>photos</value>
+  </data>
+
+  <!-- 其他设置 -->
+  <data name="OtherSettings" xml:space="preserve">
+    <value>Other Settings</value>
+  </data>
+  <data name="ShowTrayIcon" xml:space="preserve">
+    <value>Show Tray Icon</value>
+  </data>
+  <data name="PauseRotation" xml:space="preserve">
+    <value>Pause Rotation</value>
+  </data>
+  <data name="StartOnBoot" xml:space="preserve">
+    <value>Start on boot</value>
+  </data>
+
+  <!-- 按钮 -->
+  <data name="SaveSettings" xml:space="preserve">
+    <value>Save Settings</value>
+  </data>
+  <data name="SettingsSaved" xml:space="preserve">
+    <value>Settings saved!</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+
+  <!-- 时间单位 -->
+  <data name="Seconds" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>files</value>
+  </data>
+  <data name="MB" xml:space="preserve">
+    <value>MB</value>
+  </data>
+
+  <!-- 托盘菜单 -->
+  <data name="TrayToolTip" xml:space="preserve">
+    <value>MT-Photos Wallpaper</value>
+  </data>
+  <data name="PreviousWallpaper" xml:space="preserve">
+    <value>Previous Wallpaper</value>
+  </data>
+  <data name="NextWallpaper" xml:space="preserve">
+    <value>Next Wallpaper</value>
+  </data>
+  <data name="ResumeRotation" xml:space="preserve">
+    <value>Resume Rotation</value>
+  </data>
+  <data name="SettingsMenu" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ExitMenu" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+</root>

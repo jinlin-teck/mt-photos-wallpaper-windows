@@ -7,15 +7,15 @@
         ResizeMode="CanMinimize">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="20">
-            <TextBlock Text="Connection Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock x:Name="ConnectionSettingsTextBlock" Text="Connection Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
             
-            <TextBlock Text="Server URL" FontWeight="SemiBold" Margin="0,5,0,3"/>
+            <TextBlock x:Name="ServerUrlTextBlock" Text="Server URL" FontWeight="SemiBold" Margin="0,5,0,3"/>
             <TextBox x:Name="ServerUrlTextBox" />
             
-            <TextBlock Text="Username" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <TextBlock x:Name="UsernameTextBlock" Text="Username" FontWeight="SemiBold" Margin="0,10,0,3"/>
             <TextBox x:Name="UsernameTextBox" />
             
-            <TextBlock Text="Password" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <TextBlock x:Name="PasswordTextBlock" Text="Password" FontWeight="SemiBold" Margin="0,10,0,3"/>
             <PasswordBox x:Name="PasswordBox" />
             
             <Button x:Name="TestConnectionButton"
@@ -30,16 +30,16 @@
 
             <Separator Margin="0,15,0,15"/>
 
-            <TextBlock Text="Wallpaper Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock x:Name="WallpaperSettingsTextBlock" Text="Wallpaper Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
             
-            <TextBlock Text="Change Interval (seconds)" FontWeight="SemiBold" Margin="0,5,0,3"/>
+            <TextBlock x:Name="ChangeIntervalTextBlock" Text="Change Interval (seconds)" FontWeight="SemiBold" Margin="0,5,0,3"/>
             <Slider x:Name="IntervalSlider"
                     Minimum="60" Maximum="86400"
                     TickFrequency="60" IsSnapToTickEnabled="True"
                     Value="1800"/>
             <TextBlock x:Name="IntervalTextBlock" Text="1800 seconds (30 minutes)" Margin="0,3,0,0"/>
             
-            <TextBlock Text="Picture Options" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <TextBlock x:Name="PictureOptionsTextBlock" Text="Picture Options" FontWeight="SemiBold" Margin="0,10,0,3"/>
             <ComboBox x:Name="PictureOptionsComboBox">
                 <ComboBoxItem Content="Zoom" Tag="zoom"/>
                 <ComboBoxItem Content="Centered" Tag="centered"/>
@@ -49,10 +49,10 @@
                 <ComboBoxItem Content="Wallpaper" Tag="wallpaper"/>
             </ComboBox>
             
-            <TextBlock Text="Background Color" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <TextBlock x:Name="BackgroundColorTextBlock" Text="Background Color" FontWeight="SemiBold" Margin="0,10,0,3"/>
             <TextBox x:Name="BackgroundColorTextBox" Text="#000000"/>
             
-            <TextBlock Text="Minimum Aspect Ratio" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <TextBlock x:Name="MinimumAspectRatioTextBlock" Text="Minimum Aspect Ratio" FontWeight="SemiBold" Margin="0,10,0,3"/>
             <Slider x:Name="AspectRatioSlider"
                     Minimum="0" Maximum="10"
                     TickFrequency="0.1" IsSnapToTickEnabled="True"
@@ -66,16 +66,16 @@
 
             <Separator Margin="0,15,0,15"/>
 
-            <TextBlock Text="Cache Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock x:Name="CacheSettingsTextBlock" Text="Cache Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
             
-            <TextBlock Text="Max Cache Files" FontWeight="SemiBold" Margin="0,5,0,3"/>
+            <TextBlock x:Name="MaxCacheFilesLabelTextBlock" Text="Max Cache Files" FontWeight="SemiBold" Margin="0,5,0,3"/>
             <Slider x:Name="MaxCacheFilesSlider"
                     Minimum="5" Maximum="500"
                     TickFrequency="10" IsSnapToTickEnabled="True"
                     Value="50"/>
             <TextBlock x:Name="MaxCacheFilesTextBlock" Text="50 files" Margin="0,3,0,0"/>
             
-            <TextBlock Text="Max Cache Size (MB)" FontWeight="SemiBold" Margin="0,10,0,3"/>
+            <TextBlock x:Name="MaxCacheSizeLabelTextBlock" Text="Max Cache Size (MB)" FontWeight="SemiBold" Margin="0,10,0,3"/>
             <Slider x:Name="MaxCacheSizeSlider"
                     Minimum="50" Maximum="10000"
                     TickFrequency="50" IsSnapToTickEnabled="True"
@@ -84,11 +84,11 @@
 
             <Separator Margin="0,15,0,15"/>
 
-            <TextBlock Text="Album Selection" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock x:Name="AlbumSelectionTextBlock" Text="Album Selection" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
             
-            <TextBlock Text="Select Album" FontWeight="SemiBold" Margin="0,5,0,3"/>
+            <TextBlock x:Name="SelectAlbumTextBlock" Text="Select Album" FontWeight="SemiBold" Margin="0,5,0,3"/>
             <ComboBox x:Name="AlbumComboBox">
-                <ComboBoxItem Content="Please select an album"/>
+                <ComboBoxItem x:Name="DefaultAlbumItem" Content="Please select an album"/>
             </ComboBox>
             
             <Button x:Name="RefreshAlbumsButton"
@@ -98,7 +98,7 @@
 
             <Separator Margin="0,15,0,15"/>
 
-            <TextBlock Text="Other Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock x:Name="OtherSettingsTextBlock" Text="Other Settings" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
             
             <CheckBox x:Name="ShowTrayIconCheckBox"
                       Content="Show Tray Icon"

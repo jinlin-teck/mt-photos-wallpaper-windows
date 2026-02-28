@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 using MTPhotosWallpaper.Models;
+using MTPhotosWallpaper.Resources;
 
 namespace MTPhotosWallpaper.Views;
 
@@ -18,6 +19,9 @@ public class TrayIcon : IDisposable
     private string? _authCode;
     private System.Windows.Threading.DispatcherTimer? _timer;
     private bool _disposed;
+    
+    // 保存菜单项引用以便更新
+    private ToolStripMenuItem? _pauseItem;
 
     public TrayIcon(MainWindow mainWindow)
     {
@@ -33,34 +37,65 @@ public class TrayIcon : IDisposable
     {
         _notifyIcon = new NotifyIcon
         {
-            Text = "MT-Photos Wallpaper",
-            Visible = _settings.ShowTrayIcon,
-            Icon = SystemIcons.Application
+            Text = StringsManager.GetString("TrayToolTip"),
+            Visible = _settings.ShowTrayIcon
         };
+        
+        // 加载应用程序图标
+        try
+        {
+            // 使用 AppContext.BaseDirectory 支持单文件发布
+            var appDir = AppContext.BaseDirectory;
+            var iconPath = Path.Combine(appDir ?? "", "app.ico");
+            
+            if (File.Exists(iconPath))
+            {
+                _notifyIcon.Icon = new Icon(iconPath);
+            }
+            else
+            {
+                // 尝试从资源中加载
+                using var stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("MTPhotosWallpaper.app.ico");
+                if (stream != null)
+                {
+                    _notifyIcon.Icon = new Icon(stream);
+                }
+                else
+                {
+                    _notifyIcon.Icon = SystemIcons.Application;
+                }
+            }
+        }
+        catch
+        {
+            _notifyIcon.Icon = SystemIcons.Application;
+        }
 
         var contextMenu = new ContextMenuStrip();
         
-        var prevItem = new ToolStripMenuItem("Previous Wallpaper");
+        var prevItem = new ToolStripMenuItem(StringsManager.GetString("PreviousWallpaper"));
         prevItem.Click += (s, e) => PreviousWallpaper();
         contextMenu.Items.Add(prevItem);
 
-        var nextItem = new ToolStripMenuItem("Next Wallpaper");
+        var nextItem = new ToolStripMenuItem(StringsManager.GetString("NextWallpaper"));
         nextItem.Click += (s, e) => NextWallpaper();
         contextMenu.Items.Add(nextItem);
 
         contextMenu.Items.Add(new ToolStripSeparator());
 
-        var pauseItem = new ToolStripMenuItem(_settings.IsPaused ? "Resume Rotation" : "Pause Rotation");
-        pauseItem.Click += (s, e) => TogglePause(pauseItem);
-        contextMenu.Items.Add(pauseItem);
+        _pauseItem = new ToolStripMenuItem(_settings.IsPaused 
+            ? StringsManager.GetString("ResumeRotation") 
+            : StringsManager.GetString("PauseRotation"));
+        _pauseItem.Click += (s, e) => TogglePause(_pauseItem);
+        contextMenu.Items.Add(_pauseItem);
 
         contextMenu.Items.Add(new ToolStripSeparator());
 
-        var settingsItem = new ToolStripMenuItem("Settings");
+        var settingsItem = new ToolStripMenuItem(StringsManager.GetString("SettingsMenu"));
         settingsItem.Click += (s, e) => ShowSettings();
         contextMenu.Items.Add(settingsItem);
 
-        var exitItem = new ToolStripMenuItem("Exit");
+        var exitItem = new ToolStripMenuItem(StringsManager.GetString("ExitMenu"));
         exitItem.Click += (s, e) => Exit();
         contextMenu.Items.Add(exitItem);
 
@@ -235,7 +270,7 @@ public class TrayIcon : IDisposable
         {
             App.WallpaperService.SetWallpaper(
                 cachePath, _settings.PictureOptions, _settings.BackgroundColor);
-            _notifyIcon!.Text = $"MT-Photos Wallpaper\n{photo.Id}";
+            _notifyIcon!.Text = $"{StringsManager.GetString("TrayToolTip")}\n{photo.Id}";
         }
 
         await App.CacheService.CleanupCacheAsync(_settings.MaxCacheFiles, _settings.MaxCacheSizeMb);
@@ -261,7 +296,9 @@ public class TrayIcon : IDisposable
     private void TogglePause(ToolStripMenuItem item)
     {
         _settings.IsPaused = !_settings.IsPaused;
-        item.Text = _settings.IsPaused ? "Resume Rotation" : "Pause Rotation";
+        item.Text = _settings.IsPaused 
+            ? StringsManager.GetString("ResumeRotation") 
+            : StringsManager.GetString("PauseRotation");
         
         if (_settings.IsPaused)
         {
@@ -320,6 +357,20 @@ public class TrayIcon : IDisposable
             };
             _timer.Tick += (s, e) => NextWallpaper();
             _timer.Start();
+        }
+        
+        // 更新暂停菜单文本
+        if (_pauseItem != null)
+        {
+            _pauseItem.Text = _settings.IsPaused 
+                ? StringsManager.GetString("ResumeRotation") 
+                : StringsManager.GetString("PauseRotation");
+        }
+        
+        // 更新托盘图标显示状态
+        if (_notifyIcon != null)
+        {
+            _notifyIcon.Visible = _settings.ShowTrayIcon;
         }
     }
 

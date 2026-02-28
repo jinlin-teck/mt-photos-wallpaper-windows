@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using MTPhotosWallpaper.Models;
+using MTPhotosWallpaper.Resources;
 
 namespace MTPhotosWallpaper.Views;
 
@@ -19,6 +20,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        ApplyLocalization();
         LoadSettings();
         WireUpEvents();
         Closing += MainWindow_Closing;
@@ -29,6 +31,54 @@ public partial class MainWindow : Window
         // 隐藏窗口而不是关闭，程序继续在托盘运行
         e.Cancel = true;
         Hide();
+    }
+
+    private void ApplyLocalization()
+    {
+        Title = StringsManager.GetString("WindowTitle");
+        
+        // 连接设置
+        ConnectionSettingsTextBlock.Text = StringsManager.GetString("ConnectionSettings");
+        ServerUrlTextBlock.Text = StringsManager.GetString("ServerUrl");
+        UsernameTextBlock.Text = StringsManager.GetString("Username");
+        PasswordTextBlock.Text = StringsManager.GetString("Password");
+        TestConnectionButton.Content = StringsManager.GetString("TestConnection");
+        ConnectionStatusTextBlock.Text = StringsManager.GetString("NotTested");
+        
+        // 壁纸设置
+        WallpaperSettingsTextBlock.Text = StringsManager.GetString("WallpaperSettings");
+        ChangeIntervalTextBlock.Text = StringsManager.GetString("ChangeIntervalSeconds");
+        PictureOptionsTextBlock.Text = StringsManager.GetString("PictureOptions");
+        BackgroundColorTextBlock.Text = StringsManager.GetString("BackgroundColor");
+        MinimumAspectRatioTextBlock.Text = StringsManager.GetString("MinimumAspectRatio");
+        RandomPlaybackCheckBox.Content = StringsManager.GetString("RandomPlayback");
+        
+        // 更新图片选项下拉框
+        PictureOptionsComboBox.Items.Clear();
+        PictureOptionsComboBox.Items.Add(new ComboBoxItem { Content = StringsManager.GetString("Zoom"), Tag = "zoom" });
+        PictureOptionsComboBox.Items.Add(new ComboBoxItem { Content = StringsManager.GetString("Centered"), Tag = "centered" });
+        PictureOptionsComboBox.Items.Add(new ComboBoxItem { Content = StringsManager.GetString("Scaled"), Tag = "scaled" });
+        PictureOptionsComboBox.Items.Add(new ComboBoxItem { Content = StringsManager.GetString("Stretched"), Tag = "stretched" });
+        PictureOptionsComboBox.Items.Add(new ComboBoxItem { Content = StringsManager.GetString("Spanned"), Tag = "spanned" });
+        PictureOptionsComboBox.Items.Add(new ComboBoxItem { Content = StringsManager.GetString("WallpaperMode"), Tag = "wallpaper" });
+        
+        // 缓存设置
+        CacheSettingsTextBlock.Text = StringsManager.GetString("CacheSettings");
+        MaxCacheFilesLabelTextBlock.Text = StringsManager.GetString("MaxCacheFiles");
+        MaxCacheSizeLabelTextBlock.Text = StringsManager.GetString("MaxCacheSizeMb");
+        // 相册选择
+        AlbumSelectionTextBlock.Text = StringsManager.GetString("AlbumSelection");
+        SelectAlbumTextBlock.Text = StringsManager.GetString("SelectAlbum");
+        RefreshAlbumsButton.Content = StringsManager.GetString("RefreshAlbums");
+        
+        // 其他设置
+        OtherSettingsTextBlock.Text = StringsManager.GetString("OtherSettings");
+        ShowTrayIconCheckBox.Content = StringsManager.GetString("ShowTrayIcon");
+        PausedCheckBox.Content = StringsManager.GetString("PauseRotation");
+        StartOnBootCheckBox.Content = StringsManager.GetString("StartOnBoot");
+        
+        // 按钮
+        SaveButton.Content = StringsManager.GetString("SaveSettings");
     }
 
     private void LoadSettings()
@@ -53,10 +103,14 @@ public partial class MainWindow : Window
 
         BackgroundColorTextBox.Text = _settings.BackgroundColor;
 
-        var (username, _) = App.CredentialService.GetCredentials();
+        var (username, password) = App.CredentialService.GetCredentials();
         if (!string.IsNullOrEmpty(username))
         {
             UsernameTextBox.Text = username;
+        }
+        if (!string.IsNullOrEmpty(password))
+        {
+            PasswordBox.Password = password;
         }
     }
 
@@ -75,8 +129,8 @@ public partial class MainWindow : Window
     private async void TestConnectionButton_Click(object sender, RoutedEventArgs e)
     {
         TestConnectionButton.IsEnabled = false;
-        TestConnectionButton.Content = "Testing...";
-        ConnectionStatusTextBlock.Text = "Testing connection...";
+        TestConnectionButton.Content = StringsManager.GetString("Testing");
+        ConnectionStatusTextBlock.Text = StringsManager.GetString("TestingConnection");
         ConnectionStatusTextBlock.Foreground = Brushes.Gray;
 
         var serverUrl = ServerUrlTextBox.Text.Trim();
@@ -89,7 +143,7 @@ public partial class MainWindow : Window
         {
             _accessToken = result.AccessToken;
             _authCode = result.AuthCode;
-            ConnectionStatusTextBlock.Text = "Connection successful!";
+            ConnectionStatusTextBlock.Text = StringsManager.GetString("ConnectionSuccessful");
             ConnectionStatusTextBlock.Foreground = Brushes.Green;
             
             App.CredentialService.StorePassword(username, password);
@@ -97,12 +151,12 @@ public partial class MainWindow : Window
         }
         else
         {
-            ConnectionStatusTextBlock.Text = result.Error ?? "Connection failed";
+            ConnectionStatusTextBlock.Text = result.Error ?? StringsManager.GetString("ConnectionFailed");
             ConnectionStatusTextBlock.Foreground = Brushes.Red;
         }
 
         TestConnectionButton.IsEnabled = true;
-        TestConnectionButton.Content = "Test Connection";
+        TestConnectionButton.Content = StringsManager.GetString("TestConnection");
     }
 
     private async void RefreshAlbumsButton_Click(object sender, RoutedEventArgs e)
@@ -149,7 +203,7 @@ public partial class MainWindow : Window
             return;
 
         AlbumComboBox.Items.Clear();
-        AlbumComboBox.Items.Add("Please select an album");
+        AlbumComboBox.Items.Add(StringsManager.GetString("PleaseSelectAlbum"));
         _albumIds = new List<string> { "" };
 
         var serverUrl = ServerUrlTextBox.Text.Trim();
@@ -159,7 +213,7 @@ public partial class MainWindow : Window
         {
             var photoCount = album.GetDisplayPhotoCount();
             var displayName = photoCount.HasValue 
-                ? $"{album.Name} ({photoCount} photos)" 
+                ? $"{album.Name} ({photoCount} {StringsManager.GetString("PhotosLabel")})" 
                 : album.Name;
             AlbumComboBox.Items.Add(displayName);
             _albumIds.Add(album.Id.ToString());
@@ -203,7 +257,7 @@ public partial class MainWindow : Window
             _ = App.TrayIcon.ReloadAsync();
         }
 
-        MessageBox.Show("Settings saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        MessageBox.Show(StringsManager.GetString("SettingsSaved"), StringsManager.GetString("Success"), MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
     private void UpdateIntervalDisplay()
@@ -211,18 +265,21 @@ public partial class MainWindow : Window
         var seconds = (int)IntervalSlider.Value;
         var minutes = seconds / 60;
         var hours = minutes / 60;
+        var secondsLabel = StringsManager.GetString("Seconds");
         
         if (hours > 0)
         {
-            IntervalTextBlock.Text = $"{seconds} seconds ({hours} hour{(hours > 1 ? "s" : "")}";
+            var hourLabel = hours > 1 ? StringsManager.GetString("Hours") : StringsManager.GetString("Hour");
+            IntervalTextBlock.Text = $"{seconds} {secondsLabel} ({hours} {hourLabel})";
         }
         else if (minutes > 0)
         {
-            IntervalTextBlock.Text = $"{seconds} seconds ({minutes} minute{(minutes > 1 ? "s" : "")}";
+            var minuteLabel = minutes > 1 ? StringsManager.GetString("Minutes") : StringsManager.GetString("Minute");
+            IntervalTextBlock.Text = $"{seconds} {secondsLabel} ({minutes} {minuteLabel})";
         }
         else
         {
-            IntervalTextBlock.Text = $"{seconds} seconds";
+            IntervalTextBlock.Text = $"{seconds} {secondsLabel}";
         }
     }
 
@@ -233,12 +290,12 @@ public partial class MainWindow : Window
 
     private void UpdateMaxCacheFilesDisplay()
     {
-        MaxCacheFilesTextBlock.Text = $"{(int)MaxCacheFilesSlider.Value} files";
+        MaxCacheFilesTextBlock.Text = $"{(int)MaxCacheFilesSlider.Value} {StringsManager.GetString("Files")}";
     }
 
     private void UpdateMaxCacheSizeDisplay()
     {
-        MaxCacheSizeTextBlock.Text = $"{(int)MaxCacheSizeSlider.Value} MB";
+        MaxCacheSizeTextBlock.Text = $"{(int)MaxCacheSizeSlider.Value} {StringsManager.GetString("MB")}";
     }
 
     private int GetPictureOptionsIndex(string value)
@@ -256,6 +313,7 @@ public partial class MainWindow : Window
 
     private string GetPictureOptionsValue(int index)
     {
+        // 直接返回内部值，不依赖显示文本
         return index switch
         {
             1 => "centered",
